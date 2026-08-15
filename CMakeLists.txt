@@ -62,6 +62,7 @@ ament_target_dependencies(${PROJECT_NAME}
   rviz_rendering
   cv_bridge
   tf2
+  tf2_geometry_msgs
   visualization_msgs
 )
 

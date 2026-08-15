@@ -25,12 +25,23 @@
 - **🛠️ 边导航边修图，哨兵撞墙？马上改地图！ —— 实时修，边走边改，效率飙升！**
 - **💾 一键保存为 .pgm + .yaml 文件 ✅ —— 操作简单，直接接入导航用！**
 
+## ROS 2 Jazzy 适配说明
+
+本仓库在上述原项目基础上，针对 **ROS 2 Jazzy（Ubuntu 24.04）** 做了如下编译适配：
+
+| 文件 | 修改内容 | 原因 |
+| --- | --- | --- |
+| `CMakeLists.txt` | `ament_target_dependencies` 中补充 `tf2_geometry_msgs` | 原先只 `find_package` 而未传入目标，导致头文件 `tf2_geometry_msgs/tf2_geometry_msgs.hpp` 无法找到 |
+| `src/map_eraser_tool.cpp` | `#include <cv_bridge/cv_bridge.h>` 改为 `cv_bridge/cv_bridge.hpp` | Jazzy 的 `cv_bridge` 包仅提供 `.hpp` 头文件 |
+
+已在 Ubuntu 24.04 + ROS 2 Jazzy 环境下使用 `colcon build` 编译通过，并验证插件可正常加载使用。
+
 ## 编译与运行
 
 ```zsh
 mkdir -p ~/ros2_ws/src
 cd ~/ros2_ws/src
-git clone https://github.com/Tony-tpc/map_edit
+git clone https://github.com/zzx4king/pgm_edit
 cd ..
 ```
 
